@@ -1,0 +1,24 @@
+POST /auth/login {username: str, password: str} ->
+GET /auth/logout ->
+POST /auth/register {username: str, email: str, password: str} ->
+GET /auth/logged_in -> bool
+
+GET /user/profile -> {username: str, email: str, achievements: [{name: str, description: str, achieved: bool}], stats: [{name: str, value: int | str}], exp: int, max_exp: int, lvl: int}
+POST /user/update_email {email: str} ->
+POST /user/update_username {username: str} ->
+POST /user/update_password {password: str} ->
+
+GET /leaderboard/by_level -> [{username: str, score: int}]
+GET /leaderboard/by_wins -> [{username: str, score: int}]
+GET /leaderboard/by_achievements -> [{username: str, score: int}]
+
+GET /game -> [{name: str, description: str, min_players: int, max_players: int}]
+GET /game/<name:str>/rooms -> [{name: str, max_players: int, players: int, id: int}]
+
+POST /room/create {table_name: str, game_name: str, max_players: int, password: str} ->
+GET /room/ -> {cards: {'<id>': {shown: [str], hidden: int, draggable: true, name: str}}, moves: [str]}
+POST /room/ str -> {cards: {'<id>': {shown: [str], hidden: int, draggable: true, name: str}}, moves: [str]}
+GET /room/structure -> {'<id>': {is_deck: bool}}
+POST /room/join {id: int, password: str} ->
+
+

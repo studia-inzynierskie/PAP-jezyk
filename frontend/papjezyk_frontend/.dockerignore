@@ -1,0 +1,4 @@
+node_modules
+tests
+playwright-report
+playwright.config.js

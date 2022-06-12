@@ -1,0 +1,6 @@
+flask
+flask-SQLAlchemy
+pytest
+coverage
+gunicorn
+psycopg2

@@ -1,0 +1,4 @@
+PG_DB=papjezyk
+PG_USER=papjezyk
+PG_PASSWORD=change_this_string
+API_SECRET_KEY=change_this_string

@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  api:
+    restart: always
+    build: flask_api/
+    depends_on:
+        - postgresql
+    ports:
+      - 8000:8000
+    networks:
+      - papjezyk
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - PG_DB=${PG_DB}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_PORT=5432
+      - PG_ADDR=postgresql
+  frontend:
+    restart: always
+    build: frontend/papjezyk_frontend/
+    depends_on:
+        - api
+    ports:
+      - 80:3000
+    networks:
+      - papjezyk
+    environment:
+      - ZMIENNE_SRODOWISKOWE=2137
+  postgresql:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${PG_DB}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data # to sprawia że restartowanie dockera nie wywala bazy
+    networks:
+      - papjezyk
+networks:
+  papjezyk:
+volumes:
+  db:
